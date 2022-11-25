@@ -37,6 +37,87 @@
 
     <h1>HELPER</h1>
 
+    <center>
+        <div class="hider" id="d2">
+            <div class="principal">
+                <br>
+
+                <h2>MINHAS LISTAS DE COMPROMISSOS</h2>
+
+                <h5>Digite as tarefas do dia</h5>
+
+                <input id="texto" placeholder="Ex: Academia as 15hrs" required>
+
+                <button onclick="adicionar()">
+                    ENVIAR
+                </button>
+
+                <button onclick="limpar()">
+                    LIMPAR SELECIONADOS
+                </button>
+                <br>
+                <br>
+            </div>
+            <br>
+            <div id="tarefas">
+
+            </div>
+        </div>
+    </center>
+
+    <script>
+        var divTarefas = document.createElement('pgfav');
+        divTarefas.setAttribute("id", "pgfav");
+        function adicionar() {
+            var conteudo = document.getElementById('texto').value;
+            if (conteudo != "") {
+
+                var novoElemento = document.createTextNode(conteudo);
+                var divNova = document.createElement('div');
+                var botao = document.createElement('button');
+                var box = document.createElement('input');
+
+                divNova.className = "itens";
+
+                box.setAttribute("type", "checkbox");
+
+                botao.innerHTML = "Remover";
+
+                botao.addEventListener("click",
+                    function () {
+                        divNova.remove();
+                    })
+
+                divNova.appendChild(box);
+
+                box.addEventListener('change', function () {
+                    if (this.checked) {
+                        divNova.style.textDecoration = "line-through";
+                        divNova.setAttribute("id", "espaco");
+                        divNova.className = "marcados";
+                    } else {
+                        divNova.style.textDecoration = "none";
+                    }
+                })
+                divNova.appendChild(novoElemento);
+                divNova.appendChild(botao);
+                divTarefas.appendChild(divNova);
+
+                document.getElementById('pgfav').innerHTML =
+                document.body.appendChild(divNova);
+
+                document.getElementById('texto').value = "";
+
+
+            }
+        }
+
+        function limpar() {
+            for (var a = 0; a <= 10; a++)
+                document.getElementsByClassName('marcados')[a].remove();
+            a = 0;
+        }
+    </script>
 
     <footer>
         <div class="footer-content">

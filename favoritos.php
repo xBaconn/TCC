@@ -17,7 +17,6 @@
                 <li><a href="index.php">Início</a></li>
                 <li><a href="instrumentos.php">Instrumentos</a></li>
                 <li><a href="acessorios.php">Acessórios</a></li>
-                <li><a href="favoritos.php">Favoritos</a></li>
                 <li><a href="#">Sobre nós</a></li>
                 <li><a href="login.php">Login</a></li>
             </ul>
@@ -35,9 +34,11 @@
         </div>
     </header>
 
-    <h1>HELPER</h1>
+    <h1>SEUS ITENS FAVORITADOS</h1>
 
-
+    <div id="pgfav">
+         
+    </div>
     <footer>
         <div class="footer-content">
             <h3> Helper</h3>
