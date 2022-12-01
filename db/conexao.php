@@ -2,7 +2,7 @@
 $servidor = "localhost:3307";
 $usuario = "root";
 $senha = "";
-$banco = "cadastro";
+$banco = "Helper";
 
 $con = mysqli_connect($servidor,$usuario,$senha,$banco);
 
