@@ -63,6 +63,16 @@
             <button class="btn-blue" type="submit"> <a input type="submit" value="Cadastrar" name="enviar" >Cadastrar produto</a></button>
 
             <?php
+            require("db/conexao.php");
+
+            //$query = sprintf("SELECT * FROM violao");
+            // executa a query
+            //$dados = mysql_query($query, $con) or die(mysql_error());
+            // transforma os dados em um array
+            //$linha = mysql_fetch_assoc($dados);
+            // calcula quantos dados retornaram
+            //$total = mysql_num_rows($dados);
+            
             if ((isset($_POST['nome'])) && (isset($_POST['marca'])) && (isset($_POST['categoria']))) {
                 require("db/conexao.php");
                 $nome = $_POST['nome'];
@@ -102,6 +112,15 @@
                             // Free result set    
                     }
                 }
+
+            //$result = mysqli_query($con, "SELECT * FROM guitarra");
+            //SQL = "SELECT * from violao";
+            //foreach $_POST{
+            //    echo "<div style=color:black>"; 
+            //    echo $_POST['nome'];
+            //    echo $_POST['marca'];
+            //    echo"</div>";
+            //}
             ?>
         </form>
     </center>
