@@ -39,50 +39,70 @@
     <center>
         <form  action="" method="post">
             <h2>Cadastro de produtos</h2>
-
+            <br>
             <div class="##">
                 
                 <input type="text" placeholder="Nome do item" name="nome" required>
             </div>
-
+            <br>
             <div class="input-group">
                 
                 <input type="text" placeholder="Marca do item" name="marca" required>
             </div>
-
+            <br>
+            <div class="input-group"> 
+                <select name="categoria" class="box">
+                    <option value="corda">Cordas</option>
+                    <option value="metal">Metais </option>
+                    <option value="percusao">Percussões</option>
+                    <option value="teclas">teclas</option>
+                </select>
+            </div>
+            <br>
               
             <button class="btn-blue" type="submit"> <a input type="submit" value="Cadastrar" name="enviar" >Cadastrar produto</a></button>
 
             <?php
-            if ((isset($_POST['nome'])) && (isset($_POST['marca']))) {
+            if ((isset($_POST['nome'])) && (isset($_POST['marca'])) && (isset($_POST['categoria']))) {
                 require("db/conexao.php");
                 $nome = $_POST['nome'];
                 $marca = $_POST['marca'];
-
-                $sql2 = "select * from dados where marca='$marca' ";
-                $query = $con->query($sql2);
-                $row = $query->num_rows;
-
-                if ($row == 0) {
+                $categoria = $_POST['categoria'];
 
                     if ($nome == "" || $nome == null) {
-                        echo("1");
-                    }
+                        echo "<div style=color:white> --------------O nome deve ser preenchio!---------------- </div>";
+                    };
                     // Perform query
-                    if ($result = mysqli_query($con, "INSERT INTO dados(nome, marca) VALUES('$nome','$marca')")){
-                        echo "<div style=color:white> --------------Cadastrado com sucesso!---------------- </div>";
-                        //header("refresh:1;url=login.php" );
-                        header("Location: favoritos.php");
-                        // Free result set
+                    if($categoria == "corda"){
+                        $result = mysqli_query($con, "INSERT INTO violao(nome, marca) VALUES('$nome','$marca')");
+                            echo "<div style=color:white> --------------Cadastrado com sucesso!---------------- </div>";
+                            //header("refresh:1;url=login.php" );
+                            header("Location: favoritos.php");
+                            // Free result set    
+                    };
+                    if($categoria == "metal"){
+                        $result = mysqli_query($con, "INSERT INTO guitarra(nome, marca) VALUES('$nome','$marca')");
+                            echo "<div style=color:white> --------------Cadastrado com sucesso!---------------- </div>";
+                            //header("refresh:1;url=login.php" );
+                            header("Location: favoritos.php");
+                            // Free result set    
                     }
-                } else {
-
-                    echo "'<br>'<div style=color:white; align='center'> --------------------Já cadastrado--------------------- </div><br>";
+                    if($categoria == "percusao"){
+                        $result = mysqli_query($con, "INSERT INTO guitarra(nome, marca) VALUES('$nome','$marca')");
+                            echo "<div style=color:white> --------------Cadastrado com sucesso!---------------- </div>";
+                            //header("refresh:1;url=login.php" );
+                            header("Location: favoritos.php");
+                            // Free result set    
+                    }
+                    if($categoria == "teclas"){
+                        $result = mysqli_query($con, "INSERT INTO guitarra(nome, marca) VALUES('$nome','$marca')");
+                            echo "<div style=color:white> --------------Cadastrado com sucesso!---------------- </div>";
+                            //header("refresh:1;url=login.php" );
+                            header("Location: favoritos.php");
+                            // Free result set    
+                    }
                 }
-            }
-            
             ?>
-            
         </form>
     </center>
     </div>
