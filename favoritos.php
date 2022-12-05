@@ -65,63 +65,89 @@
             <?php
             require("db/conexao.php");
 
-            //$query = sprintf("SELECT * FROM violao");
-            // executa a query
-            //$dados = mysql_query($query, $con) or die(mysql_error());
-            // transforma os dados em um array
-            //$linha = mysql_fetch_assoc($dados);
-            // calcula quantos dados retornaram
-            //$total = mysql_num_rows($dados);
-            
             if ((isset($_POST['nome'])) && (isset($_POST['marca'])) && (isset($_POST['categoria']))) {
                 require("db/conexao.php");
                 $nome = $_POST['nome'];
                 $marca = $_POST['marca'];
                 $categoria = $_POST['categoria'];
 
-                    if ($nome == "" || $nome == null) {
-                        echo "<div style=color:white> --------------O nome deve ser preenchio!---------------- </div>";
-                    };
-                    // Perform query
-                    if($categoria == "corda"){
-                        $result = mysqli_query($con, "INSERT INTO violao(nome, marca) VALUES('$nome','$marca')");
-                            echo "<div style=color:white> --------------Cadastrado com sucesso!---------------- </div>";
-                            //header("refresh:1;url=login.php" );
-                            header("Location: favoritos.php");
-                            // Free result set    
-                    };
-                    if($categoria == "metal"){
-                        $result = mysqli_query($con, "INSERT INTO guitarra(nome, marca) VALUES('$nome','$marca')");
-                            echo "<div style=color:white> --------------Cadastrado com sucesso!---------------- </div>";
-                            //header("refresh:1;url=login.php" );
-                            header("Location: favoritos.php");
-                            // Free result set    
-                    }
-                    if($categoria == "percusao"){
-                        $result = mysqli_query($con, "INSERT INTO guitarra(nome, marca) VALUES('$nome','$marca')");
-                            echo "<div style=color:white> --------------Cadastrado com sucesso!---------------- </div>";
-                            //header("refresh:1;url=login.php" );
-                            header("Location: favoritos.php");
-                            // Free result set    
-                    }
-                    if($categoria == "teclas"){
-                        $result = mysqli_query($con, "INSERT INTO guitarra(nome, marca) VALUES('$nome','$marca')");
-                            echo "<div style=color:white> --------------Cadastrado com sucesso!---------------- </div>";
-                            //header("refresh:1;url=login.php" );
-                            header("Location: favoritos.php");
-                            // Free result set    
-                    }
-                }
 
-            //$result = mysqli_query($con, "SELECT * FROM guitarra");
-            //SQL = "SELECT * from violao";
-            //foreach $_POST{
-            //    echo "<div style=color:black>"; 
-            //    echo $_POST['nome'];
-            //    echo $_POST['marca'];
-            //    echo"</div>";
-            //}
+                if ($nome == "" || $nome == null) {
+                    echo "<div style=color:white> --------------O nome deve ser preenchio!---------------- </div>";
+                };
+
+                $sql2 = "SELECT * from corda where nome='$nome' ";
+                $query = $con->query($sql2);
+                $row = $query->num_rows;
+                if ($row == 0) {
+                    if($categoria == "corda"){
+                        $result = mysqli_query($con, "INSERT INTO corda(nome, marca) VALUES('$nome','$marca')");
+                            echo "<div style=color:white> --------------Cadastrado com sucesso!---------------- </div>";
+                            header("Location: favoritos.php");
+                    };
+                }else{
+                    echo "<div style=color:white> --------------Produto já cadastrado!---------------- </div>";
+                };
+
+                $sql2 = "SELECT * from metal where nome='$nome' ";
+                $query = $con->query($sql2);
+                $row = $query->num_rows;
+                if ($row == 0) {
+                    if($categoria == "metal"){
+                        $result = mysqli_query($con, "INSERT INTO metal(nome, marca) VALUES('$nome','$marca')");
+                            echo "<div style=color:white> --------------Cadastrado com sucesso!---------------- </div>";
+                            header("Location: favoritos.php");
+                    }
+                }else{
+                    echo "<div style=color:white> --------------Produto já cadastrado!---------------- </div>";
+                };
+
+                $sql2 = "SELECT * from  percussao where nome='$nome' ";
+                $query = $con->query($sql2);
+                $row = $query->num_rows;
+                if ($row == 0) {
+                    if($categoria == "percusao"){
+                        $result = mysqli_query($con, "INSERT INTO percussao(nome, marca) VALUES('$nome','$marca')");
+                            echo "<div style=color:white> --------------Cadastrado com sucesso!---------------- </div>";
+                            header("Location: favoritos.php");
+                    }
+                }else{
+                    echo "<div style=color:white> --------------Produto já cadastrado!---------------- </div>";
+                };
+
+                $sql2 = "SELECT * from teclas where nome='$nome' ";
+                $query = $con->query($sql2);
+                $row = $query->num_rows;
+                if ($row == 0) {
+                    if($categoria == "teclas"){
+                        $result = mysqli_query($con, "INSERT INTO teclas(nome, marca) VALUES('$nome','$marca')");
+                            echo "<div style=color:white> --------------Cadastrado com sucesso!---------------- </div>";
+                            header("Location: favoritos.php");    
+                    }
+                }else{
+                    echo "<div style=color:white> --------------Produto já cadastrado!---------------- </div>";
+                };
+            };
             ?>
+        <br><br>
+        <div>
+            <?php 
+            $coletados = "SELECT * from corda ";
+            $result = mysqli_query($con, $coletados);
+            ?>
+
+            <?php while ($exibe = mysqli_fetch_assoc($result)){
+                echo "<div style=color:black>"; 
+                echo $exibe['nome'];
+                echo"<br>";
+                echo"<br>";
+                echo $exibe['marca'];
+                echo"<br>";
+                echo"<br>";
+                echo"</div>";
+            };
+            ?>
+        </div>    
         </form>
     </center>
     </div>
